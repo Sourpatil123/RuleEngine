@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rule Engine</title>
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <style type="text/css">
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #007bff;
+}
+
+form {
+    background: #fff;
+    padding: 15px;
+    margin: 15px auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+li {
+    background: #fff;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+p {
+    text-align: center;
+    font-size: 18px;
+    color: #007bff;
+}
+    
+    </style>
+</head>
+<body>
+    <h1>Rule Engine</h1>
+
+    <!-- Add Rule Section -->
+    <h2>Add a Rule</h2>
+    <form action="/addRule" method="post">
+        <label for="condition">Condition:</label>
+        <input type="text" id="condition" name="condition" placeholder="Enter Condition" required>
+        
+        <label for="action">Action:</label>
+        <input type="text" id="action" name="action" placeholder="Enter Action" required>
+        
+        <button type="submit">Add Rule</button>
+    </form>
+
+    <!-- Evaluate Condition Section -->
+    <h2>Evaluate a Condition</h2>
+    <form action="/evaluate" method="get">
+        <label for="condition">Condition:</label>
+        <input type="text" id="evalCondition" name="condition" placeholder="Enter Condition" required>
+        
+        <button type="submit">Evaluate</button>
+    </form>
+
+    <!-- Evaluate Rule with User Data Section -->
+    <h2>Evaluate with User Data</h2>
+    <form action="/evaluateWithData" method="post">
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" placeholder="Enter Age" required>
+
+        <label for="department">Department:</label>
+        <input type="text" id="department" name="department" placeholder="Enter Department" required>
+
+        <label for="salary">Salary:</label>
+        <input type="number" id="salary" name="salary" placeholder="Enter Salary" required>
+
+        <label for="experience">Experience:</label>
+        <input type="number" id="experience" name="experience" placeholder="Enter Experience" required>
+
+        <label for="condition">Condition:</label>
+        <input type="text" id="condition" name="condition" placeholder="Enter Condition" required>
+        
+        <button type="submit">Evaluate with Data</button>
+    </form>
+
+    <!-- Display Existing Rules -->
+    <h2>Existing Rules</h2>
+    <ul>
+        <th:block th:each="rule : ${rules}">
+            <li th:text="'Condition: ' + ${rule.ruleCondition} + ', Action: ' + ${rule.action}"></li>
+        </th:block>
+    </ul>
+
+    <!-- Display Evaluation Result -->
+    <div th:if="${result}">
+        <h3>Evaluation Result:</h3>
+        <p th:text="${result}"></p>
+    </div>
+</body>
+</html>
